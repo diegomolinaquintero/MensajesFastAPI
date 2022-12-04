@@ -1,11 +1,11 @@
 #python
 from uuid import UUID
 from datetime import date, datetime
-from typing import Optional
+from typing import Optional, List
 #PYdantyc
 from pydantic import BaseModel, EmailStr, Field
 #FastAPI
-from fastapi import FastAPI
+from fastapi import FastAPI, status
 
 app = FastAPI()
 
@@ -47,3 +47,65 @@ class Mensaje():
 @app.get(path="/")
 def home():
     return {"Mensajes": "Sirve"}
+
+#path operation user
+@app.post(
+    path="/registro",
+    response_model= Usuario,
+    status_code= status.HTTP_201_CREATED,
+    summary="Registrar usuario",
+    tags=["usuarios"]
+    )
+def registro():
+    pass
+
+@app.post(
+    path="/login",
+    response_model= Usuario,
+    status_code= status.HTTP_200_OK,
+    summary="Login usuario",
+    tags=["usuarios"]
+    )
+def login():
+    pass
+
+@app.get(
+    path="/usuarios",
+    response_model= List[Usuario],
+    status_code= status.HTTP_200_OK,
+    summary="Ver todos los usuario",
+    tags=["usuarios"]
+    )
+def usuarios():
+    pass
+
+
+@app.get(
+    path="/usuario/{user_id}",
+    response_model= Usuario,
+    status_code= status.HTTP_200_OK,
+    summary="Ver un usuario",
+    tags=["usuarios"]
+    )
+def usuarioID():
+    pass
+
+@app.delete(
+    path="/usuario/{user_id}/delete",
+    response_model= Usuario,
+    status_code= status.HTTP_200_OK,
+    summary="Eliminar un usuario",
+    tags=["usuarios"]
+    )
+def DeleteusuarioID():
+    pass
+
+@app.put(
+    path="/usuario/{user_id}/update",
+    response_model= Usuario,
+    status_code= status.HTTP_200_OK,
+    summary="Eliminar un usuario",
+    tags=["usuarios"]
+    )
+def updateUsuarioID():
+    pass
