@@ -1,6 +1,6 @@
 #python
 from uuid import UUID
-from datetime import date
+from datetime import date, datetime
 from typing import Optional
 #PYdantyc
 from pydantic import BaseModel, EmailStr, Field
@@ -17,7 +17,7 @@ class UserBase (BaseModel):
     (...)
 #Model userlogin
 class UserLogin (UserBase):
-    contrasena: str = Field(..., min_length=8)
+    contrasena: str = Field(..., min_length=8,max_length=20)
 #Model user
 class Usuario(UserBase):
     nombre: str =  Field(
@@ -34,7 +34,15 @@ class Usuario(UserBase):
 
 #Model Mensajes
 class Mensaje():
-    pass
+    mensaje_id: UUID = Field(...)
+    contenido: str =  Field(
+        ...,
+        min_length = 1,
+        max_length=300
+        )
+    fechaCreacion: datetime = Field(default=datetime.now())
+    fechaModificado:Optional[datetime] = Field(default=None)
+    credoPor: Usuario = Field(...)
 
 @app.get(path="/")
 def home():
