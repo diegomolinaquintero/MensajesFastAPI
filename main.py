@@ -100,7 +100,20 @@ def login():
     tags=["usuarios"]
     )
 def usuarios():
-    pass
+    """_Ver todos los usuarios_
+
+    Returns:
+        json con todos los usduarios sin las password
+        - UserID: UUID
+        - Emal: str
+        - Nombre
+        - apellido
+        - cumple 
+    """
+    with open("users.json","r", encoding="utf-8") as f:
+        resultado = json.loads(f.read())
+        
+        return resultado
 
 
 @app.get(
